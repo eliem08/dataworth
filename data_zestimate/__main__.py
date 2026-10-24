@@ -6,7 +6,9 @@ from .core import DOMAIN_RATES, LICENSE_FACTORS, scan_dir, value_corpus
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="data-zestimate", description="Estimate what a data corpus is worth to an AI lab.")
+    ap = argparse.ArgumentParser(
+        prog="data-zestimate", description="Estimate what a data corpus is worth to an AI lab."
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("scan", help="scan a directory and value it")
     s.add_argument("path")
@@ -29,7 +31,11 @@ def main(argv=None):
         return 1
     val = value_corpus(prof, a.domain, a.license, a.age_months, a.exclusive)
     if a.json:
-        print(json.dumps({"profile": {**prof.__dict__, "unique_ratio": prof.unique_ratio}, "valuation": val.to_dict()}, indent=2))
+        print(
+            json.dumps(
+                {"profile": {**prof.__dict__, "unique_ratio": prof.unique_ratio}, "valuation": val.to_dict()}, indent=2
+            )
+        )
         return 0
     print(f"Corpus:          {prof.path}")
     print(f"Files:           {prof.files:,}   Size: {prof.bytes / 1e6:.1f} MB")

@@ -1,15 +1,38 @@
 """Corpus profiling and valuation."""
+
 from __future__ import annotations
 
 import hashlib
 import os
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 
 __all__ = ["DOMAIN_RATES", "LICENSE_FACTORS", "CorpusProfile", "Valuation", "scan_dir", "value_corpus"]
 
 TEXT_EXTS = {
-    ".txt", ".md", ".csv", ".tsv", ".json", ".jsonl", ".xml", ".html", ".log", ".yaml", ".yml",
-    ".py", ".js", ".ts", ".java", ".go", ".rs", ".c", ".cpp", ".h", ".rb", ".php", ".sql", ".sh",
+    ".txt",
+    ".md",
+    ".csv",
+    ".tsv",
+    ".json",
+    ".jsonl",
+    ".xml",
+    ".html",
+    ".log",
+    ".yaml",
+    ".yml",
+    ".py",
+    ".js",
+    ".ts",
+    ".java",
+    ".go",
+    ".rs",
+    ".c",
+    ".cpp",
+    ".h",
+    ".rb",
+    ".php",
+    ".sql",
+    ".sh",
 }
 
 # USD per million *unique* tokens, rough market comps.

@@ -1,5 +1,7 @@
 # data-zestimate
 
+[![CI](https://github.com/eliem08/data-zestimate/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/data-zestimate/actions/workflows/ci.yml)
+
 > **Zestimate for company data** — what your data is worth to an AI lab.
 
 AI labs are paying real money for proprietary, licensable training data
@@ -45,3 +47,25 @@ Base rates are placeholder comps — calibrate them against real licensing deals
 - PII / secrets detection that discounts value until scrubbed
 - Semantic novelty vs. Common Crawl (embedding overlap)
 - "List it" — one-click data room for buyers
+
+## Development
+
+Zero runtime dependencies; Python 3.10+.
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+python -m unittest discover -s tests -t .           # unit + CLI smoke tests
+ruff check . && ruff format --check .               # lint + format
+```
+
+```
+data_zestimate/core.py       domain logic (pure, importable, fully tested)
+data_zestimate/__main__.py   CLI (`data-zestimate ...` / `python -m data_zestimate ...`)
+tests/                unit tests + generated CLI smoke tests
+```
+
+CI runs lint and tests on Ubuntu and Windows across Python 3.10, 3.12 and 3.13.
+Design, data model, trade-offs and production path: **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+Part of the [agent-economy](https://github.com/eliem08/agent-economy) portfolio (idea #1).
