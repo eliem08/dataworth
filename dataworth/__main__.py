@@ -17,9 +17,7 @@ def _finite_float(s: str) -> float:
 
 
 def _run(argv=None):
-    ap = argparse.ArgumentParser(
-        prog="dataworth", description="Estimate what a data corpus is worth to an AI lab."
-    )
+    ap = argparse.ArgumentParser(prog="dataworth", description="Estimate what a data corpus is worth to an AI lab.")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("scan", help="scan a directory and value it")
     s.add_argument("path")
