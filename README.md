@@ -18,8 +18,8 @@ Customers receive a release archive with the wheel and the examples. Python 3.10
 ```bash
 pip install dataworth-0.1.0-py3-none-any.whl
 dataworth domains
-dataworth scan dataworth --domain code --license clear
-dataworth scan . --json
+dataworth scan examples/sample-corpus --domain support --license clear
+dataworth scan examples/sample-corpus --json
 ```
 
 ## Pricing

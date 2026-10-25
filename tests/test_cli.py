@@ -16,8 +16,8 @@ from dataworth.__main__ import main
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 COMMANDS = [
     ["domains"],
-    ["scan", "{root}/dataworth", "--domain", "code", "--license", "clear"],
-    ["scan", "{root}", "--json"],
+    ["scan", "{root}/examples/sample-corpus", "--domain", "support", "--license", "clear"],
+    ["scan", "{root}/examples/sample-corpus", "--json"],
 ]
 
 

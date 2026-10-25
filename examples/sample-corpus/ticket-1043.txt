@@ -1,0 +1,4 @@
+Subject: Two-factor codes arrive late on one carrier
+SMS codes take 3-5 minutes for a regional carrier. Authenticator app works instantly.
+Advised switching to the authenticator app; escalated delivery delays to the SMS provider.
+Resolution: provider rerouted traffic; median delivery back under 10 seconds.
