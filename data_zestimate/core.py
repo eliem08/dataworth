@@ -137,6 +137,8 @@ def value_corpus(
         raise ValueError(f"unknown domain {domain!r}; choose from {sorted(DOMAIN_RATES)}")
     if license not in LICENSE_FACTORS:
         raise ValueError(f"unknown license {license!r}; choose from {sorted(LICENSE_FACTORS)}")
+    if not 0 <= spread < 1:
+        raise ValueError("spread must be in [0, 1) so the low estimate stays positive")
     factors = {
         "unique_mtokens": prof.unique_tokens / 1e6,
         "base_rate": DOMAIN_RATES[domain],

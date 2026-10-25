@@ -43,6 +43,11 @@ class ScanTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             value_corpus(scan_dir(self.tmp.name), "astrology")
 
+    def test_spread_that_would_make_the_low_estimate_negative_is_rejected(self):
+        for spread in (1.0, 1.5, -0.1):
+            with self.subTest(spread=spread), self.assertRaises(ValueError):
+                value_corpus(scan_dir(self.tmp.name), "medical", "clear", spread=spread)
+
 
 class FactorTests(unittest.TestCase):
     def test_factors(self):
