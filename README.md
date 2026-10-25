@@ -47,7 +47,7 @@ Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless
 | **Pro** | $299 per month | Everything in Starter; Exportable buyer-ready valuation memo; Comparable-deal benchmarks; Priority support |
 | **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call |
 
-To start a trial or buy a plan, email **sales@YOUR-DOMAIN.com**.
+To start a trial or buy a plan, [request access](https://github.com/eliem08/dataworth/issues/new?title=DataWorth%20trial&labels=sales).
 
 ## Licence
 
