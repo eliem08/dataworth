@@ -1,4 +1,4 @@
-# Architecture — data-zestimate
+# Architecture — dataworth
 
 ## 1. Scope
 Give a company an instant, explainable price range for licensing a data corpus to AI labs.

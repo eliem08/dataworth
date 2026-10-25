@@ -3,31 +3,32 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "data-zestimate"
+name = "dataworth"
 version = "0.1.0"
-description = "Zestimate for company data: what your data is worth to an AI lab"
+description = "Know what your company's data is worth to an AI lab before you sign a licensing deal."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { text = "Proprietary" }
 authors = [{ name = "eliem08" }]
 dependencies = []
 classifiers = [
   "Programming Language :: Python :: 3",
-  "License :: OSI Approved :: MIT License",
+  "License :: Other/Proprietary License",
   "Operating System :: OS Independent",
+  "Private :: Do Not Upload",
 ]
 
 [project.optional-dependencies]
 dev = ["ruff>=0.6"]
 
 [project.scripts]
-data-zestimate = "data_zestimate.__main__:main"
+dataworth = "dataworth.__main__:main"
 
 [project.urls]
-Repository = "https://github.com/eliem08/data-zestimate"
+Repository = "https://github.com/eliem08/dataworth"
 
 [tool.setuptools]
-packages = ["data_zestimate"]
+packages = ["dataworth"]
 
 [tool.ruff]
 line-length = 120
@@ -38,5 +39,5 @@ select = ["E", "F", "W", "B", "UP", "I", "SIM", "RUF"]
 ignore = ["E501", "E741", "SIM108", "RUF001", "RUF002", "RUF003", "RUF022", "B905"]  # E501: ruff format owns line length
 
 [tool.ruff.lint.per-file-ignores]
-"data_zestimate/__init__.py" = ["F401", "F403"]
+"dataworth/__init__.py" = ["F401", "F403"]
 "tests/*" = ["E501"]

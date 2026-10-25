@@ -2,8 +2,8 @@ import os
 import tempfile
 import unittest
 
-from data_zestimate import scan_dir, value_corpus
-from data_zestimate.core import freshness_factor, uniqueness_factor
+from dataworth import scan_dir, value_corpus
+from dataworth.core import freshness_factor, uniqueness_factor
 
 
 class ScanTests(unittest.TestCase):

@@ -11,12 +11,12 @@ import pathlib
 import tempfile
 import unittest
 
-from data_zestimate.__main__ import main
+from dataworth.__main__ import main
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 COMMANDS = [
     ["domains"],
-    ["scan", "{root}/data_zestimate", "--domain", "code", "--license", "clear"],
+    ["scan", "{root}/dataworth", "--domain", "code", "--license", "clear"],
     ["scan", "{root}", "--json"],
 ]
 

@@ -1,16 +1,45 @@
-# data-zestimate
+<!-- sell-kit:start -->
+# DataWorth
 
-[![CI](https://github.com/eliem08/data-zestimate/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/data-zestimate/actions/workflows/ci.yml)
+[![CI](https://github.com/eliem08/dataworth/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/dataworth/actions/workflows/ci.yml)
 
-> **Zestimate for company data** — what your data is worth to an AI lab.
+> **Know what your company's data is worth to an AI lab before you sign a licensing deal.**
 
-AI labs are paying real money for proprietary, licensable training data
-(support transcripts, code, legal filings, domain documents). Most companies
-have no idea what theirs is worth. `data-zestimate` scans a corpus and gives
-an instant, explainable price range — the same way a Zestimate gives a home
-value before you ever talk to an agent.
+**Who it's for:** Founders, CDOs and corp-dev teams fielding data-licensing offers from AI labs.
 
-## What the MVP does
+**The problem:** AI labs are buying training data, and sellers have no idea whether an offer is fair, so they leave money on the table.
+
+**What you get:** Scan a corpus and get a low/mid/high valuation with every factor explained: unique tokens, domain, licence cleanliness, freshness and exclusivity.
+
+## Quickstart
+
+Customers receive a release archive with the wheel and the examples. Python 3.10+ and no other dependencies.
+
+```bash
+pip install dataworth-0.1.0-py3-none-any.whl
+dataworth domains
+dataworth scan dataworth --domain code --license clear
+dataworth scan . --json
+```
+
+## Pricing
+
+Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
+
+| Plan | Price | Includes |
+|---|---|---|
+| **Starter** | $49 per month | Unlimited local scans; Valuation report with factor breakdown; Email support |
+| **Pro** | $299 per month | Everything in Starter; Exportable buyer-ready valuation memo; Comparable-deal benchmarks; Priority support |
+| **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call |
+
+To start a trial or buy a plan, email **sales@YOUR-DOMAIN.com**.
+
+## Licence
+
+Proprietary. Copyright (c) 2026 eliem08. All rights reserved. Use requires a paid plan or an active trial; see [LICENSE](LICENSE).
+<!-- sell-kit:end -->
+
+## What it does
 
 - **Scans** a directory of text-like files (txt, md, csv, json, code, logs…)
 - **Profiles** it: file count, bytes, estimated tokens, duplicate ratio, file mix
@@ -23,9 +52,9 @@ value before you ever talk to an agent.
 
 ```bash
 pip install -e .
-data-zestimate scan ./my-support-tickets --domain support --license clear --age-months 6
-data-zestimate scan ./repo --domain code --exclusive --json
-data-zestimate domains
+dataworth scan ./my-support-tickets --domain support --license clear --age-months 6
+dataworth scan ./repo --domain code --exclusive --json
+dataworth domains
 ```
 
 ## Model
@@ -60,8 +89,8 @@ ruff check . && ruff format --check .               # lint + format
 ```
 
 ```
-data_zestimate/core.py       domain logic (pure, importable, fully tested)
-data_zestimate/__main__.py   CLI (`data-zestimate ...` / `python -m data_zestimate ...`)
+dataworth/core.py       domain logic (pure, importable, fully tested)
+dataworth/__main__.py   CLI (`dataworth ...` / `python -m dataworth ...`)
 tests/                unit tests + generated CLI smoke tests
 ```
 
