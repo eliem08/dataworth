@@ -16,7 +16,7 @@ def _finite_float(s: str) -> float:
     return v
 
 
-def _run(argv=None):
+def build_parser():
     ap = argparse.ArgumentParser(prog="dataworth", description="Estimate what a data corpus is worth to an AI lab.")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("scan", help="scan a directory and value it")
@@ -27,6 +27,11 @@ def _run(argv=None):
     s.add_argument("--exclusive", action="store_true")
     s.add_argument("--json", action="store_true")
     sub.add_parser("domains", help="list domain base rates")
+    return ap
+
+
+def _run(argv=None):
+    ap = build_parser()
     a = ap.parse_args(argv)
 
     if a.cmd == "domains":

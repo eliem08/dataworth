@@ -23,6 +23,7 @@ dev = ["ruff>=0.6"]
 
 [project.scripts]
 dataworth = "dataworth.__main__:main"
+dataworth-web = "dataworth.web:main"
 
 [project.urls]
 Repository = "https://github.com/eliem08/dataworth"
