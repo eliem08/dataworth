@@ -48,22 +48,22 @@ To sell self-serve, set four variables and point a Stripe webhook at `https://<y
 |---|---|
 | `STRIPE_SECRET_KEY` | `sk_live_...` |
 | `STRIPE_WEBHOOK_SECRET` | `whsec_...` |
-| `STRIPE_PRICES` | `team=price_123,business=price_456` |
+| `STRIPE_PRICES` | `starter=price_123,pro=price_456` |
 | `PUBLIC_URL` | `https://dataworth.example.com` |
 
-Buyers pick a plan on `/pricing`, pay on Stripe Checkout and see their API key once on the success page. Cancelling the subscription revokes the key. A selling server always requires a key.
+Buyers pick a monthly plan on `/pricing`, pay on Stripe Checkout and see their API key once on the success page. Cancelling the subscription revokes the key. A selling server always requires a key. Monthly plans start with a 14-day free trial. See `.env.example` for the full variable list (names only, no values).
 
 ## Pricing
 
-Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
+Every monthly plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted. All plans unlock the same software in this release; higher tiers add licence scope and support, not gated features.
 
 | Plan | Price | Includes |
 |---|---|---|
 | **Starter** | $49 per month | Unlimited local scans; Valuation report with factor breakdown; Email support |
-| **Pro** | $299 per month | Everything in Starter; Exportable buyer-ready valuation memo; Comparable-deal benchmarks; Priority support |
-| **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call |
+| **Pro** | $299 per month | Everything in Starter; Priority support |
+| **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call — a service engagement, not self-serve checkout, so it is not in `STRIPE_PRICES`; talk to us to book one |
 
-To start a trial or buy a plan, [request access](https://github.com/eliem08/dataworth/issues/new?title=DataWorth%20trial&labels=sales).
+To start a trial (monthly plans) or buy a plan, [request access](https://github.com/eliem08/dataworth/issues/new?title=DataWorth%20trial&labels=sales).
 
 ## Licence
 
@@ -103,7 +103,8 @@ Base rates are placeholder comps — calibrate them against real licensing deals
 
 ## Roadmap
 
-- Comparable-deal database (public licensing deals as comps)
+- Comparable-deal database (public licensing deals as comps) — the "comparable-deal benchmarks" idea lives here, not in any current plan
+- Exportable buyer-ready valuation memo (a formatted memo document, beyond the scan report/JSON output)
 - PII / secrets detection that discounts value until scrubbed
 - Semantic novelty vs. Common Crawl (embedding overlap)
 - "List it" — one-click data room for buyers
