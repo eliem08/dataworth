@@ -15,6 +15,7 @@ flowchart LR
   Buyer[AI lab buyer] -->|browses listings| Market[Data room / marketplace]
   Report -->|opt-in| Market
 ```
+Note: the Comparable deals DB and the Data room / marketplace in this diagram are roadmap, not shipped — this release scans locally and values with placeholder comps.
 The key boundary: **raw data never leaves the owner's environment**. Only aggregate statistics
 (token counts, duplication, domain, licence posture) cross it. That is what makes a first scan a
 low-trust action instead of a security review.
@@ -50,7 +51,8 @@ the number goes into a negotiation.
 - **Chars/4 token estimate.** It's within about 10% of BPE tokenisers for English. A pluggable
   tokenizer comes later.
 
-## 7. Production architecture
+## 7. Future production architecture (not shipped)
+The items below are the production path, not this release: the shipped product is the local scanner + valuation in §1–§6, with placeholder comps.
 - **Scanner agent**: a single static binary or container run inside the customer VPC. It emits a
   signed profile JSON.
 - **Valuation API** (stateless, FastAPI): `POST /valuations` takes a profile and returns a valuation.
