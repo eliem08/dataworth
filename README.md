@@ -55,15 +55,18 @@ Buyers pick a plan on `/pricing`, pay on Stripe Checkout and see their API key o
 
 ## Pricing
 
-Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
+Monthly plans start with a 14-day free trial. Prices in USD, billed monthly unless noted.
 
 | Plan | Price | Includes |
 |---|---|---|
 | **Starter** | $49 per month | Unlimited local scans; Valuation report with factor breakdown; Email support |
-| **Pro** | $299 per month | Everything in Starter; Exportable buyer-ready valuation memo; Comparable-deal benchmarks; Priority support |
+| **Pro** | $299 per month | Everything in Starter; JSON export of every valuation; Hosted API and web app; Priority support |
 | **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call |
 
 To start a trial or buy a plan, [request access](https://github.com/eliem08/dataworth/issues/new?title=DataWorth%20trial&labels=sales).
+
+Plan note: every plan runs the same software, and every API key unlocks all of it. Seat, agent and volume
+limits are licence terms; the code does not enforce them. Support, SLA and done-for-you items are services.
 
 ## Licence
 
