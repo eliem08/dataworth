@@ -91,4 +91,29 @@ SPEC = {
         },
         {"prefix": ["domains"], "title": "List domain base rates", "fields": [], "id": "domains"},
     ],
+    "plans": [
+        {
+            "key": "starter",
+            "name": "Starter",
+            "price": "$49 per month",
+            "features": ["Unlimited local scans", "Valuation report with factor breakdown", "Email support"],
+        },
+        {
+            "key": "pro",
+            "name": "Pro",
+            "price": "$299 per month",
+            "features": [
+                "Everything in Starter",
+                "JSON export of every valuation",
+                "Hosted API and web app",
+                "Priority support",
+            ],
+        },
+        {
+            "key": "deal-desk",
+            "name": "Deal Desk",
+            "price": "$2,500 per valuation",
+            "features": ["Analyst-reviewed valuation", "Negotiation brief for your term sheet", "One strategy call"],
+        },
+    ],
 }
