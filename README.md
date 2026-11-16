@@ -3,7 +3,7 @@
 
 [![CI](https://github.com/eliem08/dataworth/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/dataworth/actions/workflows/ci.yml)
 
-> **Know what your company's data is worth to an AI lab before you sign a licensing deal.**
+> **Estimate what your company's data is worth to an AI lab before you sign a licensing deal.**
 
 **Who it's for:** Founders, CDOs and corp-dev teams fielding data-licensing offers from AI labs.
 

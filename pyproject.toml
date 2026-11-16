@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "dataworth"
 version = "0.1.0"
-description = "Know what your company's data is worth to an AI lab before you sign a licensing deal."
+description = "Estimate what your company's data is worth to an AI lab before you sign a licensing deal."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Proprietary" }

@@ -2,7 +2,7 @@
 
 SPEC = {
     "name": "DataWorth",
-    "tagline": "Know what your company's data is worth to an AI lab before you sign a licensing deal.",
+    "tagline": "Estimate what your company's data is worth to an AI lab before you sign a licensing deal.",
     "cli": "dataworth",
     "state": {},
     "ops": [

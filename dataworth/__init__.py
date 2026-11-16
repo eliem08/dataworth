@@ -1,4 +1,4 @@
-"""DataWorth: Know what your company's data is worth to an AI lab before you sign a licensing deal."""
+"""DataWorth: Estimate what your company's data is worth to an AI lab before you sign a licensing deal."""
 
 from .core import *
 
