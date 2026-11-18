@@ -9,7 +9,7 @@
 
 **The problem:** AI labs are buying training data, and sellers have no idea whether an offer is fair, so they leave money on the table.
 
-**What you get:** Scan a corpus and get a low/mid/high valuation with every factor explained: unique tokens, domain, licence cleanliness, freshness and exclusivity.
+**What you get:** Scan a corpus and get a low/mid/high valuation with every factor explained: unique tokens, domain, licence cleanliness, freshness and exclusivity, priced from your own comparable deals or the built-in rates.
 
 ## Quickstart
 
@@ -34,7 +34,7 @@ docker build -t dataworth . && docker run -p 8000:8000 -e API_KEYS=sk_... -v dat
 
 Every API call needs `Authorization: Bearer <key>` once any key exists; a server on a public address refuses to start without one. Calls are rate-limited per key (60/min, `--rate`) and metered: `dataworth-web usage` prints calls per key for billing.
 
-Endpoints: `POST /api/scan`, `POST /api/domains`, plus `GET /healthz` and `GET /api/spec` (machine-readable field list).
+Endpoints: `POST /api/scan`, `POST /api/domains`, `POST /api/rates-from-deals`, plus `GET /healthz` and `GET /api/spec` (machine-readable field list).
 Files are sent as `{"name": ..., "content": ...}`, folders as `{"files": [...]}` or a base64 zip.
 
 ## Deploy and sell
@@ -61,7 +61,7 @@ Monthly plans start with a 14-day free trial. Prices in USD, billed monthly unle
 | Plan | Price | Includes |
 |---|---|---|
 | **Starter** | $49 per month | Unlimited local scans; Valuation report with factor breakdown; Email support |
-| **Pro** | $299 per month | Everything in Starter; JSON export of every valuation; Hosted API and web app; Priority support |
+| **Pro** | $299 per month | Everything in Starter; Rate cards from your own comparable deals; JSON export of every valuation; Hosted API and web app; Priority support |
 | **Deal Desk** | $2,500 per valuation | Analyst-reviewed valuation; Negotiation brief for your term sheet; One strategy call |
 
 To start a trial or buy a plan, [request access](https://github.com/eliem08/dataworth/issues/new?title=DataWorth%20trial&labels=sales).
@@ -91,6 +91,7 @@ pip install -e .
 dataworth scan ./my-support-tickets --domain support --license clear --age-months 6
 dataworth scan ./repo --domain code --exclusive --json
 dataworth domains
+dataworth rates-from-deals examples/deals.csv --out rates.json
 ```
 
 ## Model
@@ -104,7 +105,26 @@ dataworth domains
 | freshness | 0.5 – 1.0 | decays ~3%/month after 12 months |
 | exclusivity | 1.0 / 2.5 | exclusive deals command a premium |
 
-Base rates are placeholder comps — calibrate them against real licensing deals.
+The built-in base rates are starting estimates. Replace them with market data:
+
+## Your own rates
+
+Put the deals you know about (your own, a broker's, published ones) in a CSV and build a rate card from them:
+
+```bash
+dataworth rates-from-deals deals.csv --out rates.json
+dataworth domains --rates rates.json
+dataworth scan ./my-support-tickets --domain support --license clear --rates rates.json
+```
+
+`deals.csv` columns: `domain`, `unique_tokens` (or `mtokens`), `price_usd`, and optionally `license`
+(clear/mixed/unclear), `exclusive` (yes/no) and `age_months`. Each deal's implied rate is its price divided by its
+tokens and by its licence, exclusivity and freshness factors. A domain's rate is the median of its deals, and new
+domains (such as `forum`) are added. With three or more deals, the low/high band comes from how much the deals
+disagree. Domains without deals keep the built-in rate, and every scan says which basis it used.
+
+You can also write `rates.json` by hand: `domains`, `license`, `exclusive_multiplier` and `spread`, any of them.
+`examples/deals.csv` shows the format; its figures are illustrative, not real deals.
 
 ## Roadmap
 

@@ -51,5 +51,14 @@
    "age_months": 0,
    "json": true
   }
+ },
+ {
+  "op": "rates-from-deals",
+  "payload": {
+   "deals": {
+    "name": "deals.csv",
+    "content": "domain,mtokens,price_usd,license,exclusive,age_months,note\nlegal,400,9000,clear,no,6,illustrative figures for the format; replace with deals you know\nlegal,250,4500,mixed,no,18,illustrative\nlegal,900,52000,clear,yes,3,illustrative\nsupport,1200,8400,clear,no,2,illustrative\nsupport,3000,14000,mixed,no,10,illustrative\nforum,5000,6000,clear,no,24,illustrative: a domain that is not built in\n"
+   }
+  }
  }
 ]

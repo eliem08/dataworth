@@ -5,7 +5,8 @@ import math
 import os
 import sys
 
-from .core import DOMAIN_RATES, LICENSE_FACTORS, scan_dir, value_corpus
+from .core import scan_dir, value_corpus
+from .rates import RateCard, load_rates, rates_from_deals
 
 
 def _finite_float(s: str) -> float:
@@ -21,12 +22,16 @@ def build_parser():
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("scan", help="scan a directory and value it")
     s.add_argument("path")
-    s.add_argument("--domain", default="general", choices=sorted(DOMAIN_RATES))
-    s.add_argument("--license", default="mixed", choices=sorted(LICENSE_FACTORS))
+    s.add_argument("--domain", default="general", help="see `dataworth domains`")
+    s.add_argument("--license", default="mixed", help="clear, mixed or unclear (or your rate card's own)")
+    s.add_argument("--rates", help="your rate card JSON (from rates-from-deals or written by hand)")
     s.add_argument("--age-months", type=_finite_float, default=0)
     s.add_argument("--exclusive", action="store_true")
     s.add_argument("--json", action="store_true")
-    sub.add_parser("domains", help="list domain base rates")
+    sub.add_parser("domains", help="list domain base rates").add_argument("--rates", help="your rate card JSON")
+    d = sub.add_parser("rates-from-deals", help="build a rate card from comparable data deals (CSV)")
+    d.add_argument("deals", help="CSV: domain, unique_tokens or mtokens, price_usd[, license, exclusive, age_months]")
+    d.add_argument("--out", help="write the rate card here (default: print it)")
     return ap
 
 
@@ -34,16 +39,32 @@ def _run(argv=None):
     ap = build_parser()
     a = ap.parse_args(argv)
 
+    if a.cmd == "rates-from-deals":
+        card = rates_from_deals(a.deals)
+        text = json.dumps(card.to_dict(), indent=2)
+        if a.out:
+            with open(a.out, "w", encoding="utf-8") as fh:
+                fh.write(text + "\n")
+            print(f"rate card from {card.source} written to {a.out}")
+            for d, n in sorted(card.deals.items()):
+                print(f"  {d:<15} ${card.domains[d]:>8.2f} / M unique tokens  ({n} deal{'s' * (n != 1)})")
+            print(f"  spread +/-{card.spread:.0%}")
+        else:
+            print(text)
+        return 0
+    card = load_rates(a.rates) if getattr(a, "rates", None) else RateCard()
     if a.cmd == "domains":
-        for d, r in sorted(DOMAIN_RATES.items(), key=lambda kv: kv[1]):
-            print(f"{d:<15} ${r:>6.2f} / M unique tokens")
+        print(f"rates: {card.source}")
+        for d, r in sorted(card.domains.items(), key=lambda kv: kv[1]):
+            basis = f"  ({card.deals[d]} deals)" if d in card.deals else ""
+            print(f"{d:<15} ${r:>6.2f} / M unique tokens{basis}")
         return 0
 
     prof = scan_dir(a.path)
     if not prof.files:
         print("no text files found", file=sys.stderr)
         return 1
-    val = value_corpus(prof, a.domain, a.license, a.age_months, a.exclusive)
+    val = value_corpus(prof, a.domain, a.license, a.age_months, a.exclusive, rates=card)
     if a.json:
         print(
             json.dumps(
@@ -54,7 +75,8 @@ def _run(argv=None):
     print(f"Corpus:          {prof.path}")
     print(f"Files:           {prof.files:,}   Size: {prof.bytes / 1e6:.1f} MB")
     print(f"Est. tokens:     {prof.tokens:,}  (unique {prof.unique_ratio:.1%})")
-    print(f"Domain:          {a.domain}  (${DOMAIN_RATES[a.domain]:.2f} / M unique tokens)")
+    basis = f"{card.deals[a.domain]} deals" if a.domain in card.deals else card.source
+    print(f"Domain:          {a.domain}  (${val.factors['base_rate']:.2f} / M unique tokens; {basis})")
     for k, v in val.factors.items():
         print(f"  {k:<14} {v:g}")
     print(f"Estimate:        ${val.mid:,.0f}  (range ${val.low:,.0f} - ${val.high:,.0f})")

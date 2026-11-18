@@ -131,21 +131,27 @@ def value_corpus(
     license: str = "mixed",
     age_months: float = 0,
     exclusive: bool = False,
-    spread: float = 0.35,
+    spread: float | None = None,
+    rates=None,
 ) -> Valuation:
-    if domain not in DOMAIN_RATES:
-        raise ValueError(f"unknown domain {domain!r}; choose from {sorted(DOMAIN_RATES)}")
-    if license not in LICENSE_FACTORS:
-        raise ValueError(f"unknown license {license!r}; choose from {sorted(LICENSE_FACTORS)}")
+    """rates: a RateCard (see rates.py); without one the built-in estimates are used."""
+    domains = rates.domains if rates else DOMAIN_RATES
+    licenses = rates.license if rates else LICENSE_FACTORS
+    if spread is None:
+        spread = rates.spread if rates else 0.35
+    if domain not in domains:
+        raise ValueError(f"unknown domain {domain!r}; choose from {sorted(domains)}")
+    if license not in licenses:
+        raise ValueError(f"unknown license {license!r}; choose from {sorted(licenses)}")
     if not 0 <= spread < 1:
         raise ValueError("spread must be in [0, 1) so the low estimate stays positive")
     factors = {
         "unique_mtokens": prof.unique_tokens / 1e6,
-        "base_rate": DOMAIN_RATES[domain],
+        "base_rate": domains[domain],
         "uniqueness": round(uniqueness_factor(prof.unique_ratio), 4),
-        "license": LICENSE_FACTORS[license],
+        "license": licenses[license],
         "freshness": round(freshness_factor(age_months), 4),
-        "exclusivity": 2.5 if exclusive else 1.0,
+        "exclusivity": (rates.exclusive_multiplier if rates else 2.5) if exclusive else 1.0,
     }
     mid = 1.0
     for v in factors.values():
