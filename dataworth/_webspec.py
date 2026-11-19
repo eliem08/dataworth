@@ -46,7 +46,7 @@ SPEC = {
                 {
                     "dest": "rates",
                     "flag": "--rates",
-                    "kind": "text",
+                    "kind": "file",
                     "required": False,
                     "choices": None,
                     "default": None,
@@ -97,7 +97,7 @@ SPEC = {
                 {
                     "dest": "rates",
                     "flag": "--rates",
-                    "kind": "text",
+                    "kind": "file",
                     "required": False,
                     "choices": None,
                     "default": None,
@@ -126,7 +126,7 @@ SPEC = {
                 {
                     "dest": "out",
                     "flag": "--out",
-                    "kind": "text",
+                    "kind": "output",
                     "required": False,
                     "choices": None,
                     "default": None,

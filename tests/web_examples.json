@@ -60,5 +60,42 @@
     "content": "domain,mtokens,price_usd,license,exclusive,age_months,note\nlegal,400,9000,clear,no,6,illustrative figures for the format; replace with deals you know\nlegal,250,4500,mixed,no,18,illustrative\nlegal,900,52000,clear,yes,3,illustrative\nsupport,1200,8400,clear,no,2,illustrative\nsupport,3000,14000,mixed,no,10,illustrative\nforum,5000,6000,clear,no,24,illustrative: a domain that is not built in\n"
    }
   }
+ },
+ {
+  "op": "scan",
+  "payload": {
+   "path": {
+    "files": [
+     {
+      "name": "runbook-refunds.md",
+      "content": "# Refund runbook\n\n1. Confirm the charge in the billing console and the reason code.\n2. Refunds under 30 days: approve in full. Over 30 days: prorate by unused days.\n3. Annual plans cancelled in month one: full refund minus payment fees.\n4. Log the refund with the ticket number and notify the customer with the expected bank delay (5-10 days).\n"
+     },
+     {
+      "name": "ticket-1042.txt",
+      "content": "Subject: Export to CSV fails for invoices over 10,000 rows\nCustomer reports the export spinner never finishes. Reproduced on the Pro plan with 12,400 invoices.\nWorkaround: filter by quarter and export in batches. Engineering ticket ENG-2231 opened.\nResolution: pagination added to the export job in release 4.18; customer confirmed the fix.\n"
+     },
+     {
+      "name": "ticket-1043.txt",
+      "content": "Subject: Two-factor codes arrive late on one carrier\nSMS codes take 3-5 minutes for a regional carrier. Authenticator app works instantly.\nAdvised switching to the authenticator app; escalated delivery delays to the SMS provider.\nResolution: provider rerouted traffic; median delivery back under 10 seconds.\n"
+     }
+    ]
+   },
+   "domain": "general",
+   "license": "mixed",
+   "rates": {
+    "name": "rates.json",
+    "content": "{\n  \"domains\": {\n    \"web\": 0.5,\n    \"general\": 1.0,\n    \"support\": 7.3889,\n    \"conversational\": 8.0,\n    \"code\": 5.0,\n    \"scientific\": 12.0,\n    \"legal\": 23.1111,\n    \"financial\": 20.0,\n    \"medical\": 25.0,\n    \"forum\": 1.875\n  },\n  \"license\": {\n    \"unclear\": 0.25,\n    \"mixed\": 0.6,\n    \"clear\": 1.0\n  },\n  \"exclusive_multiplier\": 2.5,\n  \"spread\": 0.109,\n  \"source\": \"6 deals in examples/deals.csv\",\n  \"deals\": {\n    \"legal\": 3,\n    \"support\": 2,\n    \"forum\": 1\n  }\n}\n"
+   },
+   "age_months": 0
+  }
+ },
+ {
+  "op": "domains",
+  "payload": {
+   "rates": {
+    "name": "rates.json",
+    "content": "{\n  \"domains\": {\n    \"web\": 0.5,\n    \"general\": 1.0,\n    \"support\": 7.3889,\n    \"conversational\": 8.0,\n    \"code\": 5.0,\n    \"scientific\": 12.0,\n    \"legal\": 23.1111,\n    \"financial\": 20.0,\n    \"medical\": 25.0,\n    \"forum\": 1.875\n  },\n  \"license\": {\n    \"unclear\": 0.25,\n    \"mixed\": 0.6,\n    \"clear\": 1.0\n  },\n  \"exclusive_multiplier\": 2.5,\n  \"spread\": 0.109,\n  \"source\": \"6 deals in examples/deals.csv\",\n  \"deals\": {\n    \"legal\": 3,\n    \"support\": 2,\n    \"forum\": 1\n  }\n}\n"
+   }
+  }
  }
 ]
